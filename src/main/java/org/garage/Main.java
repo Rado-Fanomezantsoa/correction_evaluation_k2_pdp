@@ -12,5 +12,8 @@ public class Main {
 
         VenteParModele vpm = dr.findVenteParModele();
         System.out.println(vpm);
+
+        TotalPrix totalPrix = dr.findTotalPrixKia();
+        System.out.println(totalPrix);
     }
 }

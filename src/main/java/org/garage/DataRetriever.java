@@ -80,4 +80,33 @@ public class DataRetriever {
             throw new RuntimeException(e);
         }
     }
+
+    public TotalPrix findTotalPrixKia() {
+        String sql = """
+                SELECT SUM(pa.prix * v.quantite) AS total
+            FROM Vente v
+            JOIN Piece_auto pa ON v.id_piece_auto = pa.id
+            JOIN Modele_voiture mv ON pa.id_modele_voiture = mv.id
+            WHERE mv.marque = 'KIA';    
+                """;
+
+        try (Connection connection = new DbConnection().getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery();
+        )
+        {
+            if (rs.next()) {
+                TotalPrix tp = new TotalPrix();
+
+                tp.setTotal(rs.getDouble("total"));
+
+                return tp;
+            }
+
+            return null;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
