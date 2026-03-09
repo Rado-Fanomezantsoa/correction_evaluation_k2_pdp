@@ -9,5 +9,8 @@ public class Main {
         DataRetriever dr = new DataRetriever();
         List<VenteParMarque> liste = dr.findVenteParMarque();
         System.out.println(liste);
+
+        VenteParModele vpm = dr.findVenteParModele();
+        System.out.println(vpm);
     }
 }
